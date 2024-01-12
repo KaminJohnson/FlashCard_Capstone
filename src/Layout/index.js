@@ -55,6 +55,20 @@ function Layout() {
       return() => abortController.abort();
   }
 
+  function handleUpdateDecks() {
+    const abortController = new AbortController();
+    const fetchDeck = async () => {
+      try {
+        const fetchedDecks = await listDecks(abortController.signal);
+        setDecks(fetchedDecks);
+      } catch (error) {
+        console.error("Error fetching decks:", error);
+      }
+    };
+    fetchDeck();
+    return () => {abortController.abort();};
+  }
+
   return (
     <div>
       <Header />
@@ -70,7 +84,7 @@ function Layout() {
             <DeckView handleDeleteDeck={handleDeleteDeck} />
           </Route>
           <Route exact path="/decks/:deckId/edit">
-            <EditDeck />
+            <EditDeck handleUpdateDecks={handleUpdateDecks} />
           </Route>
           <Route exact path="/decks/:deckId/study">
             <Study decks={decks}/>

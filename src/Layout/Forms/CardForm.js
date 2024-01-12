@@ -15,6 +15,8 @@ function CardForm({handleSubmit, handleDone, initialFront = "", initialBack = ""
     const onSubmit = (event) => {
         event.preventDefault();
         handleSubmit({front: front, back: back});
+        setFront("");
+        setBack("");
     }
 
     return (

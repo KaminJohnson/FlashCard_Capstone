@@ -15,6 +15,8 @@ function DeckForm({handleSubmit, handleCancel, initialName = "", initialDescript
     const onSubmit = (event) => {
         event.preventDefault();
         handleSubmit({name: name, description: description});
+        setName("");
+        setDescription("");
     }
 
     return (

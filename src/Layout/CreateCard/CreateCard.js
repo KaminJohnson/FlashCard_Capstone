@@ -27,6 +27,7 @@ function CreateCard() {
         createCard(deckId, cardData, abortController.signal)
         .then(() => {
             setDeck({...deck, cards: [...deck.cards, cardData]});
+            
         })
         return () => abortController.abort();
     };

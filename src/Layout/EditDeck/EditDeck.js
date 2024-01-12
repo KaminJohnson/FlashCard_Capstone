@@ -3,7 +3,7 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import { readDeck, updateDeck } from "../../utils/api";
 import DeckForm from "../Forms/DeckForm";
 
-function EditDeck() {
+function EditDeck({ handleUpdateDecks }) {
     const { deckId } = useParams();
     const history = useHistory();
     const [deck, setDeck] = useState({cards:[]});
@@ -26,6 +26,7 @@ function EditDeck() {
         setDeck({...deck, name: deckData.name, description: deckData.description});
         const abortController = new AbortController();
         updateDeck({...deck, name: deckData.name, description: deckData.description}, abortController.signal);
+        handleUpdateDecks();
         return () => abortController.abort();
     }
 
